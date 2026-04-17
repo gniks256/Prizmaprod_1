@@ -34,18 +34,22 @@ app.post("/api/send-email", async (req, res) => {
       rejectUnauthorized: false,
       minVersion: 'TLSv1.2'
     },
-    debug: true,
-    logger: true
+    connectionTimeout: 5000, // 5 seconds maximum to connect
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
+    debug: false,
+    logger: false
   });
 
   try {
-    await transporter.verify();
+    console.log(`Sending email to gniks1@yandex.ru via ${smtpHost}...`);
     await transporter.sendMail({
       from: smtpUser,
       to: "gniks1@yandex.ru",
       subject: subject || "Новая заявка с сайта PRIZMA",
       html: html,
     });
+    console.log("Email sent!");
     res.json({ success: true });
   } catch (error) {
     console.error("Email error:", error);
