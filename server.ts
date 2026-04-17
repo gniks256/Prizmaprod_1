@@ -11,52 +11,46 @@ const app = express();
 
 app.use(express.json());
 
-// Email API endpoint
-app.post("/api/send-email", async (req, res) => {
-  const { subject, html } = req.body;
+// Telegram API endpoint
+app.post("/api/send-lead", async (req, res) => {
+  const { subject, html, text } = req.body;
   
-  // SMTP Configuration
-  const smtpHost = process.env.SMTP_HOST || 'smtp.yandex.ru';
-  // Try 465 first for Yandex SSL if 587 fails on Vercel
-  const smtpPort = parseInt(process.env.SMTP_PORT || '465'); 
-  const smtpUser = process.env.SMTP_USER || 'gniks1@yandex.ru'; 
-  const smtpPass = process.env.SMTP_PASS || 'rnpanrlkvdryrezi'; 
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
 
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpPort === 465,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-    tls: {
-      rejectUnauthorized: false,
-      minVersion: 'TLSv1.2'
-    },
-    connectionTimeout: 5000, // 5 seconds maximum to connect
-    greetingTimeout: 5000,
-    socketTimeout: 5000,
-    debug: false,
-    logger: false
-  });
+  if (!botToken || !chatId) {
+    console.error("Missing Telegram configuration");
+    return res.status(500).json({ error: "Telegram notifications not configured" });
+  }
+
+  // Convert HTML-ish lead data to Telegram Markdown or plain text
+  // For simplicity, we'll use the 'text' property if provided, or a simplified version of subject
+  const message = `
+<b>${subject || 'Новая заявка'}</b>
+${text || 'Новые данные на сайте'}
+`.trim();
 
   try {
-    console.log(`Sending email to gniks1@yandex.ru via ${smtpHost}...`);
-    await transporter.sendMail({
-      from: smtpUser,
-      to: "gniks1@yandex.ru",
-      subject: subject || "Новая заявка с сайта PRIZMA",
-      html: html,
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "HTML",
+      }),
     });
-    console.log("Email sent!");
-    res.json({ success: true });
+
+    if (response.ok) {
+      res.json({ success: true });
+    } else {
+      const errorData = await response.json();
+      console.error("Telegram API error:", errorData);
+      res.status(500).json({ error: "Failed to send Telegram message" });
+    }
   } catch (error) {
-    console.error("Email error:", error);
-    res.status(500).json({ 
-      error: "Failed to send email", 
-      details: error instanceof Error ? error.message : String(error) 
-    });
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

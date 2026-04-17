@@ -29,25 +29,19 @@ export const Contacts: React.FC = () => {
         setStatus('loading');
         
         const subject = `Новая заявка (Контакты): ${name}`;
-        const html = `
-          <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
-            <h2 style="color: #18181b; border-bottom: 2px solid #18181b; padding-bottom: 10px;">Заявка из формы контактов PRIZMA</h2>
-            <p><strong>Имя:</strong> ${name}</p>
-            <p><strong>Контакт:</strong> ${contact}</p>
-            <p><strong>Сообщение:</strong></p>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #18181b;">
-              ${(message || 'Без сообщения').replace(/\n/g, '<br>')}
-            </div>
-          </div>
-        `.trim();
+        const text = `
+Имя: ${name}
+Контакт: ${contact}
+Сообщение: ${message || 'Без сообщения'}
+`.trim();
 
         try {
-            const response = await fetch("/api/send-email", {
+            const response = await fetch("/api/send-lead", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ subject, html })
+                body: JSON.stringify({ subject, text })
             });
             
             if (response.ok) {

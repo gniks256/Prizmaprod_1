@@ -74,33 +74,28 @@ export const Calculator: React.FC = () => {
 
     setStatus('loading');
 
-    // Data for Email
-    const subject = `Новая заявка: ${totalPrice.toLocaleString()}₽ (PRIZMA)`;
-    const html = `
-      <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
-        <h2 style="color: #18181b; border-bottom: 2px solid #18181b; padding-bottom: 10px;">Заявка с калькулятора PRIZMA</h2>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Имя:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${name}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Контакт:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${contact}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Стоимость:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${totalPrice.toLocaleString()}₽</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Хронометраж:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formatDuration(duration)}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Срок:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${getDeadlineLabel(deadline)}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Формат:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${orientation}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">Опции:</td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${[
-            hasActors ? 'Актеры/Модели' : null,
-            hasNarrator ? 'Диктор' : null
-          ].filter(Boolean).join(', ') || 'Нет'}</td></tr>
-        </table>
-      </div>
-    `.trim();
+    // Data for Telegram
+    const subject = `💰 Новый расчет: ${totalPrice.toLocaleString()}₽`;
+    const text = `
+Имя: ${name}
+Контакт: ${contact}
+Стоимость: ${totalPrice.toLocaleString()}₽
+Хронометраж: ${formatDuration(duration)}
+Срок: ${getDeadlineLabel(deadline)}
+Формат: ${orientation}
+Опции: ${[
+      hasActors ? 'Актеры/Модели' : null,
+      hasNarrator ? 'Диктор' : null
+    ].filter(Boolean).join(', ') || 'Нет'}
+`.trim();
 
     try {
-        const response = await fetch("/api/send-email", {
+        const response = await fetch("/api/send-lead", {
             method: "POST",
             headers: { 
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ subject, html })
+            body: JSON.stringify({ subject, text })
         });
 
         if (response.ok) {
