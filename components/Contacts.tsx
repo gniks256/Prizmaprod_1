@@ -35,25 +35,35 @@ export const Contacts: React.FC = () => {
 Сообщение: ${message || 'Без сообщения'}
 `.trim();
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+
         try {
             const response = await fetch("/api/send-lead", {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ subject, text })
+                body: JSON.stringify({ subject, text }),
+                signal: controller.signal
             });
+            clearTimeout(timeoutId);
             
             if (response.ok) {
                 setStatus('success');
                 setName(''); setContact(''); setMessage('');
                 setTimeout(() => setStatus('idle'), 5000);
             } else { 
-                throw new Error(`Server responded with ${response.status}`);
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `Server responded with ${response.status}`);
             }
-        } catch (error) { 
+        } catch (error: any) { 
+            clearTimeout(timeoutId);
             console.error('Submission error:', error);
             setStatus('error'); 
+            if (error.name === 'AbortError') {
+                console.error('Request timed out');
+            }
             setTimeout(() => setStatus('idle'), 5000);
         }
     };

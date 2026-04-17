@@ -89,14 +89,19 @@ export const Calculator: React.FC = () => {
     ].filter(Boolean).join(', ') || 'Нет'}
 `.trim();
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
         const response = await fetch("/api/send-lead", {
             method: "POST",
             headers: { 
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ subject, text })
+            body: JSON.stringify({ subject, text }),
+            signal: controller.signal
         });
+        clearTimeout(timeoutId);
 
         if (response.ok) {
             setStatus('success');
@@ -104,10 +109,13 @@ export const Calculator: React.FC = () => {
             setName('');
             setContact('');
         } else {
+            const errorData = await response.json().catch(() => ({}));
+            console.error("Server error details:", errorData);
             setStatus('error');
         }
-    } catch (error) {
-        console.error(error);
+    } catch (error: any) {
+        clearTimeout(timeoutId);
+        console.error("Submission error:", error);
         setStatus('error');
     }
   };

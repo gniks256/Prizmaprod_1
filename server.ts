@@ -20,15 +20,20 @@ app.post("/api/send-lead", async (req, res) => {
 
   if (!botToken || !chatId) {
     console.error("Missing Telegram configuration");
-    return res.status(500).json({ error: "Telegram notifications not configured" });
+    return res.status(500).json({ 
+      error: "Telegram notifications not configured", 
+      details: "TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing in environment variables" 
+    });
   }
 
-  // Convert HTML-ish lead data to Telegram Markdown or plain text
-  // For simplicity, we'll use the 'text' property if provided, or a simplified version of subject
   const message = `
 <b>${subject || 'Новая заявка'}</b>
 ${text || 'Новые данные на сайте'}
 `.trim();
+
+  // Abort signal for the fetch call to Telegram
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds for Telegram to respond
 
   try {
     const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -39,18 +44,28 @@ ${text || 'Новые данные на сайте'}
         text: message,
         parse_mode: "HTML",
       }),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       res.json({ success: true });
     } else {
       const errorData = await response.json();
       console.error("Telegram API error:", errorData);
-      res.status(500).json({ error: "Failed to send Telegram message" });
+      res.status(500).json({ 
+        error: "Failed to send Telegram message", 
+        telegramError: errorData 
+      });
     }
-  } catch (error) {
+  } catch (error: any) {
+    clearTimeout(timeoutId);
     console.error("Server error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ 
+      error: error.name === 'AbortError' ? "Telegram API timeout" : "Internal server error",
+      details: error.message 
+    });
   }
 });
 
