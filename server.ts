@@ -15,14 +15,18 @@ app.use(express.json());
 app.post("/api/send-lead", async (req, res) => {
   const { subject, html, text } = req.body;
   
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || '8493812803:AAHilr-GUFAwENIV8oca0z8eXcuvp6KN9L8';
+  const chatId = process.env.TELEGRAM_CHAT_ID || '374517327';
 
   if (!botToken || !chatId) {
-    console.error("Missing Telegram configuration");
+    const missing = [];
+    if (!botToken) missing.push("TELEGRAM_BOT_TOKEN");
+    if (!chatId) missing.push("TELEGRAM_CHAT_ID");
+    
+    console.error(`Missing Telegram configuration: ${missing.join(", ")}`);
     return res.status(500).json({ 
       error: "Telegram notifications not configured", 
-      details: "TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing in environment variables" 
+      details: `В настройках Vercel отсутствуют переменные: ${missing.join(", ")}` 
     });
   }
 
