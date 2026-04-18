@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 import { Sidebar } from './components/Sidebar';
 import { ProjectCard } from './components/ProjectCard';
 import { WhyUs } from './components/WhyUs';
@@ -136,6 +137,7 @@ const App: React.FC = () => {
       <Router>
         <AppContent />
       </Router>
+      <Analytics />
     </HelmetProvider>
   );
 };
