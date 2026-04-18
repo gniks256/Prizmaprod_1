@@ -92,7 +92,7 @@ export const Calculator: React.FC = () => {
 `.trim();
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), 40000);
 
     try {
         console.log("Calculator: starting submission...");
@@ -101,13 +101,16 @@ export const Calculator: React.FC = () => {
             headers: { 
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ subject, text }),
+            body: JSON.stringify({ subject, text, name }),
             signal: controller.signal
         });
         clearTimeout(timeoutId);
 
         if (response.ok) {
             setStatus('success');
+            if (name.toUpperCase() === 'TEST') {
+                setErrorText('ТЕСТ СВЯЗИ ПРОШЕЛ УСПЕШНО!');
+            }
             setName('');
             setContact('');
             setTimeout(() => setStatus('idle'), 5000);
@@ -123,12 +126,12 @@ export const Calculator: React.FC = () => {
         clearTimeout(timeoutId);
         console.error("Calculator submission error:", error);
         if (error.name === 'AbortError') {
-            setErrorText('Превышено время ожидания (10 сек)');
+            setErrorText('Превышено время ожидания (40 сек)');
         } else {
             setErrorText(error.message || 'Неизвестная ошибка');
         }
         setStatus('error');
-        setTimeout(() => setStatus('idle'), 8000);
+        setTimeout(() => setStatus('idle'), 10000);
     }
   };
 

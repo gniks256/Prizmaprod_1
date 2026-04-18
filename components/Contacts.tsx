@@ -38,7 +38,7 @@ export const Contacts: React.FC = () => {
 `.trim();
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        const timeoutId = setTimeout(() => controller.abort(), 40000); // 40 second timeout
 
         try {
             console.log("Starting submission to /api/send-lead...");
@@ -47,7 +47,7 @@ export const Contacts: React.FC = () => {
                 headers: { 
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ subject, text }),
+                body: JSON.stringify({ subject, text, name }), // Include name for TEST mode
                 signal: controller.signal
             });
             clearTimeout(timeoutId);
@@ -55,6 +55,9 @@ export const Contacts: React.FC = () => {
             if (response.ok) {
                 console.log("Submission successful");
                 setStatus('success');
+                if (name.toUpperCase() === 'TEST') {
+                    setErrorText('ТЕСТ СВЯЗИ ПРОШЕЛ УСПЕШНО!');
+                }
                 setName(''); setContact(''); setMessage('');
                 setTimeout(() => setStatus('idle'), 5000);
             } else { 
@@ -69,11 +72,11 @@ export const Contacts: React.FC = () => {
             console.error('Final submission error:', error);
             setStatus('error'); 
             if (error.name === 'AbortError') {
-                setErrorText('Превышено время ожидания (10 сек)');
+                setErrorText('Превышено время ожидания (40 сек). Похоже, сервер не отвечает.');
             } else if (!errorText) {
                 setErrorText(error.message || 'Неизвестная ошибка');
             }
-            setTimeout(() => setStatus('idle'), 8000);
+            setTimeout(() => setStatus('idle'), 10000);
         }
     };
 

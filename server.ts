@@ -17,8 +17,14 @@ app.get("/api/send-lead", (req, res) => {
 
 // Telegram API endpoint
 app.post("/api/send-lead", (req, res) => {
-  const { subject, html, text } = req.body;
+  const { subject, text, name } = req.body;
   
+  // DEBUG MODE: If name is "TEST", respond immediately to check connection
+  if (name && name.toUpperCase() === 'TEST') {
+     console.log("DEBUG: Test connection successful");
+     return res.json({ success: true, info: "Test connection successful. Server is responding." });
+  }
+
   const botToken = process.env.TELEGRAM_BOT_TOKEN || '8493812803:AAHilr-GUFAwENIV8oca0z8eXcuvp6KN9L8';
   const chatId = process.env.TELEGRAM_CHAT_ID || '374517327';
 
