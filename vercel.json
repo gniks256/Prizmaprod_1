@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.ts",
+      "src": "api/send-lead.ts",
       "use": "@vercel/node"
     },
     {
@@ -12,6 +12,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/api/send-lead",
+      "destination": "/api/send-lead.ts"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
