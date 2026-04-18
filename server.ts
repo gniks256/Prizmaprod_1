@@ -25,16 +25,13 @@ app.post("/api/send-lead", (req, res) => {
      return res.json({ success: true, info: "Test connection successful. Server is responding." });
   }
 
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || '8493812803:AAHilr-GUFAwENIV8oca0z8eXcuvp6KN9L8';
-  const chatId = process.env.TELEGRAM_CHAT_ID || '374517327';
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
-    const missing = [];
-    if (!botToken) missing.push("TELEGRAM_BOT_TOKEN");
-    if (!chatId) missing.push("TELEGRAM_CHAT_ID");
     return res.status(500).json({ 
       error: "Telegram configuration missing", 
-      details: missing.join(", ") 
+      details: "Please set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID as environment variables" 
     });
   }
 
