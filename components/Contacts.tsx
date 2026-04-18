@@ -21,12 +21,14 @@ export const Contacts: React.FC = () => {
     const [contact, setContact] = useState('');
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorText, setErrorText] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!name.trim() || !contact.trim()) return;
 
         setStatus('loading');
+        setErrorText('');
         
         const subject = `Новая заявка (Контакты): ${name}`;
         const text = `
@@ -58,16 +60,20 @@ export const Contacts: React.FC = () => {
             } else { 
                 const errorData = await response.json().catch(() => ({}));
                 console.error("Server error data:", errorData);
-                throw new Error(errorData.error || `Server error: ${response.status}`);
+                const msg = errorData.error || `Server error: ${response.status}`;
+                setErrorText(msg + (errorData.details ? `: ${errorData.details}` : ''));
+                throw new Error(msg);
             }
         } catch (error: any) { 
             clearTimeout(timeoutId);
             console.error('Final submission error:', error);
             setStatus('error'); 
             if (error.name === 'AbortError') {
-                console.error('Frontend timeout triggered');
+                setErrorText('Превышено время ожидания (10 сек)');
+            } else if (!errorText) {
+                setErrorText(error.message || 'Неизвестная ошибка');
             }
-            setTimeout(() => setStatus('idle'), 6000);
+            setTimeout(() => setStatus('idle'), 8000);
         }
     };
 
@@ -142,9 +148,16 @@ export const Contacts: React.FC = () => {
                             {status === 'loading' ? <Loader2 className="animate-spin" size={16} /> : status === 'success' ? <Check size={16} /> : status === 'error' ? 'Ошибка' : 'Отправить заявку'}
                         </button>
                         {status === 'error' && (
-                            <p className="text-[10px] text-red-600 font-mono uppercase tracking-widest text-center mt-2">
-                                Ошибка при отправке. Попробуйте позже или напишите в Telegram.
-                            </p>
+                            <div className="flex flex-col gap-1 mt-2">
+                                <p className="text-[10px] text-red-600 font-mono uppercase tracking-widest text-center">
+                                    Ошибка при отправке
+                                </p>
+                                {errorText && (
+                                    <p className="text-[9px] text-red-400 font-mono text-center lowercase italic">
+                                        {errorText}
+                                    </p>
+                                )}
+                            </div>
                         )}
                         {status === 'success' && (
                             <p className="text-[10px] text-green-600 font-mono uppercase tracking-widest text-center mt-2">

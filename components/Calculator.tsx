@@ -20,6 +20,7 @@ export const Calculator: React.FC = () => {
 
   // Submission State
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorText, setErrorText] = useState<string>('');
 
   // Calculate Price
   useEffect(() => {
@@ -73,6 +74,7 @@ export const Calculator: React.FC = () => {
     }
 
     setStatus('loading');
+    setErrorText('');
 
     // Data for Telegram
     const subject = `💰 Новый расчет: ${totalPrice.toLocaleString()}₽`;
@@ -112,14 +114,21 @@ export const Calculator: React.FC = () => {
         } else {
             const errorData = await response.json().catch(() => ({}));
             console.error("Calculator server error:", errorData);
+            const msg = errorData.error || `Server error: ${response.status}`;
+            setErrorText(msg + (errorData.details ? `: ${errorData.details}` : ''));
             setStatus('error');
-            setTimeout(() => setStatus('idle'), 6000);
+            setTimeout(() => setStatus('idle'), 8000);
         }
     } catch (error: any) {
         clearTimeout(timeoutId);
         console.error("Calculator submission error:", error);
+        if (error.name === 'AbortError') {
+            setErrorText('Превышено время ожидания (10 сек)');
+        } else {
+            setErrorText(error.message || 'Неизвестная ошибка');
+        }
         setStatus('error');
-        setTimeout(() => setStatus('idle'), 6000);
+        setTimeout(() => setStatus('idle'), 8000);
     }
   };
 
@@ -274,7 +283,14 @@ export const Calculator: React.FC = () => {
               </div>
               
               {status === 'error' && (
-                 <p className="text-red-500 text-xs font-bold mt-[-10px]">Не удалось отправить. Попробуйте позже или напишите нам в Telegram.</p>
+                 <div className="flex flex-col gap-1 mt-[-10px]">
+                    <p className="text-red-500 text-xs font-bold">Не удалось отправить.</p>
+                    {errorText && (
+                        <p className="text-[10px] text-red-400 font-mono italic lowercase">
+                            {errorText}
+                        </p>
+                    )}
+                 </div>
               )}
             </div>
 

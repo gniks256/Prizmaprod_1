@@ -33,14 +33,15 @@ app.post("/api/send-lead", (req, res) => {
   }
 
   const message = `
-<b>${subject || 'Новая заявка'}</b>
+${subject || 'Новая заявка'}
+---
 ${text || 'Новые данные на сайте'}
 `.trim();
 
   const postData = JSON.stringify({
     chat_id: chatId,
     text: message,
-    parse_mode: "HTML",
+    // Removed HTML parse_mode to avoid parsing errors
   });
 
   const options = {
@@ -52,7 +53,7 @@ ${text || 'Новые данные на сайте'}
       'Content-Type': 'application/json',
       'Content-Length': Buffer.byteLength(postData),
     },
-    timeout: 7000, // 7 seconds socket timeout
+    timeout: 7000,
   };
 
   const telegramReq = https.request(options, (telegramRes) => {
