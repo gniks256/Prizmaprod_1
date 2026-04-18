@@ -36,9 +36,10 @@ export const Contacts: React.FC = () => {
 `.trim();
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
         try {
+            console.log("Starting submission to /api/send-lead...");
             const response = await fetch("/api/send-lead", {
                 method: "POST",
                 headers: { 
@@ -50,21 +51,23 @@ export const Contacts: React.FC = () => {
             clearTimeout(timeoutId);
             
             if (response.ok) {
+                console.log("Submission successful");
                 setStatus('success');
                 setName(''); setContact(''); setMessage('');
                 setTimeout(() => setStatus('idle'), 5000);
             } else { 
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || `Server responded with ${response.status}`);
+                console.error("Server error data:", errorData);
+                throw new Error(errorData.error || `Server error: ${response.status}`);
             }
         } catch (error: any) { 
             clearTimeout(timeoutId);
-            console.error('Submission error:', error);
+            console.error('Final submission error:', error);
             setStatus('error'); 
             if (error.name === 'AbortError') {
-                console.error('Request timed out');
+                console.error('Frontend timeout triggered');
             }
-            setTimeout(() => setStatus('idle'), 5000);
+            setTimeout(() => setStatus('idle'), 6000);
         }
     };
 

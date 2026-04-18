@@ -2,17 +2,21 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import nodemailer from "nodemailer";
+import https from "https";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
 app.use(express.json());
 
+// Support for simple GET test
+app.get("/api/send-lead", (req, res) => {
+  res.json({ message: "API is alive. Use POST to send leads." });
+});
+
 // Telegram API endpoint
-app.post("/api/send-lead", async (req, res) => {
+app.post("/api/send-lead", (req, res) => {
   const { subject, html, text } = req.body;
   
   const botToken = process.env.TELEGRAM_BOT_TOKEN || '8493812803:AAHilr-GUFAwENIV8oca0z8eXcuvp6KN9L8';
@@ -22,11 +26,9 @@ app.post("/api/send-lead", async (req, res) => {
     const missing = [];
     if (!botToken) missing.push("TELEGRAM_BOT_TOKEN");
     if (!chatId) missing.push("TELEGRAM_CHAT_ID");
-    
-    console.error(`Missing Telegram configuration: ${missing.join(", ")}`);
     return res.status(500).json({ 
-      error: "Telegram notifications not configured", 
-      details: `В настройках Vercel отсутствуют переменные: ${missing.join(", ")}` 
+      error: "Telegram configuration missing", 
+      details: missing.join(", ") 
     });
   }
 
@@ -35,42 +37,49 @@ app.post("/api/send-lead", async (req, res) => {
 ${text || 'Новые данные на сайте'}
 `.trim();
 
-  // Abort signal for the fetch call to Telegram
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds for Telegram to respond
+  const postData = JSON.stringify({
+    chat_id: chatId,
+    text: message,
+    parse_mode: "HTML",
+  });
 
-  try {
-    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "HTML",
-      }),
-      signal: controller.signal
-    });
-    
-    clearTimeout(timeoutId);
+  const options = {
+    hostname: 'api.telegram.org',
+    port: 443,
+    path: `/bot${botToken}/sendMessage`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData),
+    },
+    timeout: 7000, // 7 seconds socket timeout
+  };
 
-    if (response.ok) {
-      res.json({ success: true });
-    } else {
-      const errorData = await response.json();
-      console.error("Telegram API error:", errorData);
-      res.status(500).json({ 
-        error: "Failed to send Telegram message", 
-        telegramError: errorData 
-      });
-    }
-  } catch (error: any) {
-    clearTimeout(timeoutId);
-    console.error("Server error:", error);
-    res.status(500).json({ 
-      error: error.name === 'AbortError' ? "Telegram API timeout" : "Internal server error",
-      details: error.message 
+  const telegramReq = https.request(options, (telegramRes) => {
+    let responseBody = '';
+    telegramRes.on('data', (chunk) => { responseBody += chunk; });
+    telegramRes.on('end', () => {
+      if (telegramRes.statusCode && telegramRes.statusCode >= 200 && telegramRes.statusCode < 300) {
+        res.json({ success: true, info: "Message sent" });
+      } else {
+        console.error("Telegram error:", telegramRes.statusCode, responseBody);
+        res.status(500).json({ error: "Telegram API error", status: telegramRes.statusCode, details: responseBody });
+      }
     });
-  }
+  });
+
+  telegramReq.on('error', (error) => {
+    console.error("HTTPS request error:", error);
+    res.status(500).json({ error: "Network error calling Telegram", details: error.message });
+  });
+
+  telegramReq.on('timeout', () => {
+    telegramReq.destroy();
+    res.status(504).json({ error: "Telegram API took too long to respond" });
+  });
+
+  telegramReq.write(postData);
+  telegramReq.end();
 });
 
 async function startServer() {

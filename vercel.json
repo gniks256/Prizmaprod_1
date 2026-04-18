@@ -13,7 +13,11 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/send-lead",
+      "destination": "server.ts"
+    },
+    {
+      "source": "/api/:path*",
       "destination": "server.ts"
     },
     {

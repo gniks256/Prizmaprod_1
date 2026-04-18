@@ -90,9 +90,10 @@ export const Calculator: React.FC = () => {
 `.trim();
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     try {
+        console.log("Calculator: starting submission...");
         const response = await fetch("/api/send-lead", {
             method: "POST",
             headers: { 
@@ -105,18 +106,20 @@ export const Calculator: React.FC = () => {
 
         if (response.ok) {
             setStatus('success');
-            // Clear sensitive fields
             setName('');
             setContact('');
+            setTimeout(() => setStatus('idle'), 5000);
         } else {
             const errorData = await response.json().catch(() => ({}));
-            console.error("Server error details:", errorData);
+            console.error("Calculator server error:", errorData);
             setStatus('error');
+            setTimeout(() => setStatus('idle'), 6000);
         }
     } catch (error: any) {
         clearTimeout(timeoutId);
-        console.error("Submission error:", error);
+        console.error("Calculator submission error:", error);
         setStatus('error');
+        setTimeout(() => setStatus('idle'), 6000);
     }
   };
 
