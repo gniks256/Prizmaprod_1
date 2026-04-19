@@ -17,7 +17,7 @@
       "destination": "/api/send-lead.ts"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!robots\\.txt|sitemap\\.xml|favicon\\.ico|api/).*)",
       "destination": "/index.html"
     }
   ]
