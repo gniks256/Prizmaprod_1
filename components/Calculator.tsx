@@ -244,14 +244,14 @@ export const Calculator: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold">Телефон или почта</label>
+                  <label className="text-sm font-bold">Номер телефона</label>
                   <input 
-                    type="text" 
+                    type="tel" 
                     value={contact}
                     disabled={status === 'loading' || status === 'success'}
-                    onChange={(e) => setContact(e.target.value)}
+                    onChange={(e) => setContact(e.target.value.replace(/[^\d+()\-\s]/g, ''))}
                     className="w-full border-b-2 border-zinc-400 py-2 focus:outline-none focus:border-zinc-900 transition-colors bg-transparent disabled:opacity-50"
-                    placeholder="+7 999 000-00-00"
+                    placeholder="+7 (999) 000-00-00"
                   />
                 </div>
               </div>

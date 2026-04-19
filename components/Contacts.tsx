@@ -140,8 +140,17 @@ export const Contacts: React.FC = () => {
                             <input type="text" name="name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Имя" className="w-full border-b border-zinc-200 py-1 text-base focus:outline-none focus:border-zinc-900 transition-colors bg-transparent font-medium" disabled={status === 'loading' || status === 'success'} />
                         </div>
                         <div className="flex flex-col gap-1">
-                            <label className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">Контакт для связи</label>
-                            <input type="text" name="contact" required value={contact} onChange={(e) => setContact(e.target.value)} placeholder="@тг или +7..." className="w-full border-b border-zinc-200 py-1 text-base focus:outline-none focus:border-zinc-900 transition-colors bg-transparent font-medium" disabled={status === 'loading' || status === 'success'} />
+                            <label className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">Телефон для связи</label>
+                            <input 
+                                type="tel" 
+                                name="contact" 
+                                required 
+                                value={contact} 
+                                onChange={(e) => setContact(e.target.value.replace(/[^\d+()\-\s]/g, ''))} 
+                                placeholder="+7 (999) 000-00-00" 
+                                className="w-full border-b border-zinc-200 py-1 text-base focus:outline-none focus:border-zinc-900 transition-colors bg-transparent font-medium" 
+                                disabled={status === 'loading' || status === 'success'} 
+                            />
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">Ваш вопрос</label>

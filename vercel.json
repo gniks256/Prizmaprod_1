@@ -16,6 +16,7 @@
       "source": "/api/send-lead",
       "destination": "/api/send-lead.ts"
     },
+    { "handle": "filesystem" },
     {
       "source": "/(.*)",
       "destination": "/index.html"
