@@ -1,24 +1,16 @@
 {
   "version": 2,
-  "builds": [
+  "routes": [
     {
-      "src": "api/send-lead.ts",
-      "use": "@vercel/node"
+      "src": "/api/send-lead",
+      "dest": "/api/send-lead.ts"
     },
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/send-lead",
-      "destination": "/api/send-lead.ts"
+      "handle": "filesystem"
     },
     {
-      "source": "/((?!robots\\.txt|sitemap\\.xml|favicon\\.ico|api/).*)",
-      "destination": "/index.html"
+      "src": "/.*",
+      "dest": "/index.html"
     }
   ]
 }
