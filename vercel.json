@@ -2,6 +2,14 @@
   "version": 2,
   "routes": [
     {
+      "src": "/robots.txt",
+      "dest": "/robots.txt"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "/sitemap.xml"
+    },
+    {
       "src": "/api/send-lead",
       "dest": "/api/send-lead.ts"
     },
