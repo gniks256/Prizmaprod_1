@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Sidebar } from './components/Sidebar';
 import { ProjectCard } from './components/ProjectCard';
 import { WhyUs } from './components/WhyUs';
@@ -138,6 +139,7 @@ const App: React.FC = () => {
         <AppContent />
       </Router>
       <Analytics />
+      <SpeedInsights />
     </HelmetProvider>
   );
 };
