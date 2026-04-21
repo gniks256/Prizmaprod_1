@@ -29,6 +29,7 @@ export interface Project {
   
   // Video source
   videoUrl?: string;
+  videos?: { title?: string, url: string, isVertical?: boolean }[];
   
   // Legacy VK support
   vkEmbedType?: VkEmbedType;

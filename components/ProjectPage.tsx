@@ -55,24 +55,51 @@ export const ProjectPage: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-24">
         <div className="lg:col-span-8">
-          <div className={`relative overflow-hidden bg-zinc-900 rounded-xl shadow-2xl border border-zinc-800 ${project.isVertical ? 'aspect-[9/16] max-w-md mx-auto' : 'aspect-video'}`}>
-            {videoSrc ? (
-              <iframe 
-                src={`${videoSrc}?autoplay=false&dnt=true`} 
-                className="absolute inset-0 w-full h-full"
-                title={project.title}
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-                allowFullScreen
-              />
-            ) : (
-              <img 
-                src={project.imageUrl || 'https://via.placeholder.com/1920x1080?text=PRIZMA'} 
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-            )}
-          </div>
+          {project.videos ? (
+            <div className={`grid gap-12 ${project.videos.some(v => v.isVertical) ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+              {project.videos.map((vid, idx) => {
+                const src = getEmbedUrl(vid.url);
+                return (
+                  <div key={idx} className="flex flex-col gap-4">
+                    {vid.title && (
+                      <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-400">
+                        {vid.title}
+                      </h3>
+                    )}
+                    <div className={`relative overflow-hidden bg-zinc-900 rounded-xl shadow-2xl border border-zinc-800 ${vid.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
+                      <iframe 
+                        src={`${src}?autoplay=false&dnt=true`} 
+                        className="absolute inset-0 w-full h-full"
+                        title={vid.title || project.title}
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className={`relative overflow-hidden bg-zinc-900 rounded-xl shadow-2xl border border-zinc-800 ${project.isVertical ? 'aspect-[9/16] max-w-md mx-auto' : 'aspect-video'}`}>
+              {videoSrc ? (
+                <iframe 
+                  src={`${videoSrc}?autoplay=false&dnt=true`} 
+                  className="absolute inset-0 w-full h-full"
+                  title={project.title}
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                  allowFullScreen
+                />
+              ) : (
+                <img 
+                  src={project.imageUrl || 'https://via.placeholder.com/1920x1080?text=PRIZMA'} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
+          )}
 
           {project.description && (
             <div className="mt-12 md:mt-16 pt-8 md:pt-12 border-t border-zinc-300/50">

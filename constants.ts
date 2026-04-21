@@ -113,31 +113,32 @@ export const PROJECTS: Project[] = [
 Если вам нужно промо-видео для коттеджного поселка или жилого комплекса, которое раскроет атмосферу и инфраструктуру объекта — **обращайтесь!**`
   },
   {
-    id: 'car-1',
-    title: 'Кристалл Воронеж | Mercedes',
+    id: 'scentmart-social',
+    title: 'Scentmart | Контент для соцсетей',
+    client: 'Scentmart',
+    year: '2024',
+    category: Category.SOCIAL,
+    imageUrl: 'https://kinescope.io/so5L4D52sA2kRyXbswTsoY/poster.jpg',
+    videos: [
+      { url: 'https://kinescope.io/so5L4D52sA2kRyXbswTsoY', isVertical: true },
+      { url: 'https://kinescope.io/0YUe5oerw6bwthT9bptk1f', isVertical: true },
+      { url: 'https://kinescope.io/iTBBtLxxtfhA1KxZLz6RjC', isVertical: true },
+      { url: 'https://kinescope.io/0Rnjn8Lk44tAjZtTXkyTCV', isVertical: true }
+    ]
+  },
+  {
+    id: 'kristall-social',
+    title: 'Кристалл Воронеж | Соцсети',
     client: 'Кристалл Воронеж',
     year: '2025',
     category: Category.SOCIAL,
     imageUrl: 'https://kinescope.io/77JCsodiEnTYNTCoEuPdCe/poster.jpg',
-    videoUrl: 'https://kinescope.io/77JCsodiEnTYNTCoEuPdCe'
-  },
-  {
-    id: 'car-2',
-    title: 'Кристалл Воронеж | Omoda',
-    client: 'Кристалл Воронеж',
-    year: '2025',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/imDfYrosjX41cu5M2P7vX6/poster.jpg',
-    videoUrl: 'https://kinescope.io/imDfYrosjX41cu5M2P7vX6'
-  },
-  {
-    id: 'car-3',
-    title: 'Кристалл Воронеж | Tesla',
-    client: 'Кристалл Воронеж',
-    year: '2025',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/5rhg92g7kd5Qgedw4fKEQn/poster.jpg',
-    videoUrl: 'https://kinescope.io/5rhg92g7kd5Qgedw4fKEQn'
+    videos: [
+      { title: 'Mercedes', url: 'https://kinescope.io/77JCsodiEnTYNTCoEuPdCe', isVertical: true },
+      { title: 'Omoda', url: 'https://kinescope.io/imDfYrosjX41cu5M2P7vX6', isVertical: true },
+      { title: 'Tesla', url: 'https://kinescope.io/5rhg92g7kd5Qgedw4fKEQn', isVertical: true },
+      { title: 'Hyundai Creta', url: 'https://kinescope.io/oVjkDwb3XynCjhah97h5f9', isVertical: true }
+    ]
   },
   {
     id: 'event-1',
@@ -165,46 +166,6 @@ export const PROJECTS: Project[] = [
     category: Category.EVENTS,
     imageUrl: 'https://kinescope.io/2VuqsWRcLa34soQPGeWemo/poster.jpg',
     videoUrl: 'https://kinescope.io/2VuqsWRcLa34soQPGeWemo'
-  },
-  {
-    id: 'social-1',
-    title: 'Scentmart Promo 01',
-    client: 'Scentmart',
-    year: '2024',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/so5L4D52sA2kRyXbswTsoY/poster.jpg',
-    videoUrl: 'https://kinescope.io/so5L4D52sA2kRyXbswTsoY',
-    isVertical: true
-  },
-  {
-    id: 'social-2',
-    title: 'Scentmart Promo 02',
-    client: 'Scentmart',
-    year: '2024',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/0YUe5oerw6bwthT9bptk1f/poster.jpg',
-    videoUrl: 'https://kinescope.io/0YUe5oerw6bwthT9bptk1f',
-    isVertical: true
-  },
-  {
-    id: 'social-3',
-    title: 'Scentmart Promo 03',
-    client: 'Scentmart',
-    year: '2024',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/iTBBtLxxtfhA1KxZLz6RjC/poster.jpg',
-    videoUrl: 'https://kinescope.io/iTBBtLxxtfhA1KxZLz6RjC',
-    isVertical: true
-  },
-  {
-    id: 'social-4',
-    title: 'Scentmart Promo 04',
-    client: 'Scentmart',
-    year: '2024',
-    category: Category.SOCIAL,
-    imageUrl: 'https://kinescope.io/0Rnjn8Lk44tAjZtTXkyTCV/poster.jpg',
-    videoUrl: 'https://kinescope.io/0Rnjn8Lk44tAjZtTXkyTCV',
-    isVertical: true
   },
   {
     id: 'arch-3',
@@ -331,6 +292,43 @@ export const BLOG_POSTS = [
 • **Эффект:** Покупатель пришел на просмотр уже с четким ощущением, что это «его» дом.
 
 **Вывод:** Когда в проект вложена душа, задача видеографа — не просто снять стены, а упаковать эту любовь в визуальный ряд. Именно такой подход превращает зрителей в покупателей.
+    `
+  },
+  {
+    id: 3,
+    slug: "photo-vs-video-real-estate",
+    title: "Фото vs Видео: Что быстрее продаст объект недвижимости?",
+    date: "22 Апреля 2026",
+    excerpt: "Разбираем, что важнее — идеальный кадр или динамичный ролик? Спойлер: фото привлекает внимание, а видео заставляет влюбиться.",
+    showContactCTA: true,
+    content: `
+В маркетинге недвижимости часто спорят: что важнее — идеальный кадр или динамичный ролик? Ответ прост: фото привлекает внимание, а видео заставляет влюбиться.
+
+Давайте разберем, как эти два инструмента работают в связке и почему в 2026 году видео становится «тяжелой артиллерией» в продажах.
+
+#### Фотография: Эстетика первого клика
+Фото — это база. Это «лицо» объявления, которое пользователь видит в ленте. Задача качественной архитектурной фотографии — создать безупречный первый импульс.
+
+*   **Плюс**: Быстрое сканирование информации.
+*   **Минус**: Статика скрывает логику передвижения и объем. Фотография может показать, как выглядит кухня, но она редко дает понять, как эта кухня соединена с гостиной и сколько шагов до окна.
+
+#### Видео: Эффект присутствия и цифры
+Если фото — это обложка книги, то видео — это ее содержание. Вот почему видеоконтент сейчас обходит статику по эффективности:
+
+1. **Удержание внимания на 40% дольше.** Статистика неумолима: пользователь проводит на странице с видео значительно больше времени. В эпоху «клипового мышления» динамичная смена планов и движение камеры удерживают взгляд гораздо эффективнее, чем серия даже самых красивых слайдов.
+
+2. **Понятная планировка без чертежей.** Видеосъемка позволяет «прошить» пространство единым маршрутом. Зритель нативно понимает эргономику объекта: высоту проемов, ширину коридоров и то, как падает свет из панорамных окон в разное время. Это создает честную картину, которая формирует доверие.
+
+3. **Фильтр «пустых» показов.** Видео — это виртуальный тур, который экономит ваше время. После просмотра качественного ролика на объект приходят только те, кто уже внутренне согласился с планировкой и атмосферой. Это отсеивает праздное любопытство и оставляет только «горячих» лидов.
+
+---
+
+### Что в итоге?
+Фотография — это отличный крючок, но видео — это инструмент, который закрывает сделку.
+
+Представьте: покупатель видит красивое фото фасада в «Петровских озерах». Он заинтригован. Но когда он включает видео и видит, как солнечный блик скользит по текстуре handmade-стола, а камера плавно уходит в сторону леса за окном — он начинает примерять эту жизнь на себя.
+
+**Мой совет:** Используйте фотографии для превью и каталогов, но доверяйте видео презентацию «души» и логики вашего проекта. Именно такой микс создает образ премиального объекта, за который хочется заплатить.
     `
   }
 ];
