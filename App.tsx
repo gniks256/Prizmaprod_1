@@ -12,6 +12,8 @@ import { Team } from './components/Team';
 import { Contacts } from './components/Contacts';
 import { Pricing } from './components/Pricing';
 import { ProjectPage } from './components/ProjectPage';
+import { Journal } from './components/Journal';
+import { BlogPostPage } from './components/BlogPostPage';
 import { Home } from './components/Home';
 import { Category } from './types';
 import { PROJECTS } from './constants';
@@ -84,6 +86,8 @@ const AppRoutes: React.FC<{
           <Route path="/portfolio" element={<Portfolio activeCategory={activeCategory} />} />
           <Route path="/project/:id" element={<PageWrapper><ProjectPage /></PageWrapper>} />
           <Route path="/pricing" element={<PageWrapper><Pricing /></PageWrapper>} />
+          <Route path="/journal" element={<PageWrapper><Journal /></PageWrapper>} />
+          <Route path="/journal/:slug" element={<PageWrapper><BlogPostPage /></PageWrapper>} />
           <Route path="/why-us" element={<PageWrapper><WhyUs /></PageWrapper>} />
           <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
           <Route path="/contacts" element={<PageWrapper><Contacts /></PageWrapper>} />

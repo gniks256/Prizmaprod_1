@@ -41,4 +41,15 @@ export interface NavLink {
   href: string;
 }
 
-export type Page = 'portfolio' | 'why_us' | 'team' | 'contacts' | 'pricing';
+export type Page = 'portfolio' | 'why_us' | 'team' | 'contacts' | 'pricing' | 'journal';
+
+export interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: string;
+  videoUrl?: string;
+  showContactCTA?: boolean;
+}

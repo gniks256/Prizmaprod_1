@@ -114,6 +114,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </NavLink>
 
           <NavLink 
+            to="/journal"
+            className={({ isActive }) => `text-left text-sm transition-all duration-200 py-1 flex items-center gap-2 ${
+              isActive ? 'text-zinc-900 font-bold translate-x-1' : 'text-zinc-500 hover:text-zinc-800'
+            }`}
+          >
+            Журнал
+          </NavLink>
+
+          <NavLink 
             to="/why-us"
             className={({ isActive }) => `text-left text-sm transition-all duration-200 py-1 flex items-center gap-2 ${
               isActive ? 'text-zinc-900 font-bold translate-x-1' : 'text-zinc-500 hover:text-zinc-800'
