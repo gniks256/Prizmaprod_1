@@ -115,7 +115,7 @@ export const ProjectPage: React.FC = () => {
           <div className="flex flex-col gap-8 md:gap-10">
             <div>
               <p className="text-zinc-400 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-900 break-words">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter leading-none text-zinc-900 break-normal hyphens-none">
                 {project.title}
               </h1>
             </div>
