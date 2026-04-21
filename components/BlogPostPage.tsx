@@ -41,7 +41,7 @@ export const BlogPostPage: React.FC = () => {
           <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-4">
             {post.date}
           </div>
-          <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
+          <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-8">
             {post.title}
           </h1>
           <p className="text-xl text-zinc-500 font-medium leading-relaxed italic border-l-4 border-zinc-900 pl-6">

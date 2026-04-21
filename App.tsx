@@ -49,11 +49,11 @@ const Portfolio: React.FC<{
         <meta name="description" content={`Посмотрите наши работы в категории ${activeCategory}. Профессиональный видеопродакшн PRIZMA.`} />
       </Helmet>
       <div className="md:hidden mb-6">
-        <h1 className="text-2xl font-black text-zinc-900 mb-0.5 uppercase tracking-tighter leading-none">{activeCategory}</h1>
+        <h1 className="text-2xl font-black text-zinc-900 mb-0.5 uppercase tracking-tight leading-tight">{activeCategory}</h1>
         <p className="text-zinc-500 text-[10px] font-mono uppercase tracking-widest">{filteredProjects.length} Проектов</p>
       </div>
       <div className="hidden md:block mb-8 md:mb-12">
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">
+        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight">
           {activeCategory === Category.ALL ? 'Портфолио' : activeCategory}
         </h1>
       </div>

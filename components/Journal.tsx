@@ -14,7 +14,7 @@ export const Journal: React.FC = () => {
       </Helmet>
 
       <div className="mb-12">
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-4">
           Журнал
         </h1>
         <p className="text-zinc-500 font-medium max-w-xl">

@@ -53,8 +53,16 @@ export const ProjectPage: React.FC = () => {
         <span className="text-xs font-mono uppercase tracking-widest">Назад</span>
       </button>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
-        <div className="lg:col-span-8 order-2 lg:order-1">
+      {/* Title for Mobile */}
+      <div className="lg:hidden mb-10">
+        <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
+        <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight leading-tight text-zinc-900 break-words">
+          {project.title}
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20">
+        <div className="lg:col-span-8">
           {project.videos ? (
             <div className={`grid gap-8 md:gap-12 ${project.videos.some(v => v.isVertical) ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
               {project.videos.map((vid, idx) => {
@@ -111,29 +119,29 @@ export const ProjectPage: React.FC = () => {
           )}
         </div>
 
-        <div className="lg:col-span-4 flex flex-col justify-between order-1 lg:order-2">
-          <div className="flex flex-col gap-8 md:gap-10 max-w-full overflow-hidden">
-            <div>
-              <p className="text-zinc-400 text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black uppercase tracking-tighter leading-none text-zinc-900 break-normal hyphens-none">
+        <div className="lg:col-span-4">
+          <div className="flex flex-col gap-8 md:gap-10 sticky top-32">
+            <div className="hidden lg:block">
+              <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
+              <h1 className="text-4xl xl:text-6xl font-black uppercase tracking-tight leading-tight text-zinc-900 break-words">
                 {project.title}
               </h1>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 py-8 md:py-10 border-y border-zinc-300/50">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-8 py-8 md:py-10 border-y border-zinc-300/50">
               <div>
-                <p className="text-zinc-400 text-[9px] sm:text-[10px] font-mono uppercase tracking-widest mb-1">Клиент</p>
-                <p className="text-sm sm:text-base font-bold text-zinc-900 uppercase">{project.client}</p>
+                <p className="text-zinc-400 text-[9px] font-mono uppercase tracking-widest mb-1">Клиент</p>
+                <p className="text-sm font-bold text-zinc-900 uppercase">{project.client}</p>
               </div>
               <div>
-                <p className="text-zinc-400 text-[9px] sm:text-[10px] font-mono uppercase tracking-widest mb-1">Год</p>
-                <p className="text-sm sm:text-base font-bold text-zinc-900 font-mono">{project.year}</p>
+                <p className="text-zinc-400 text-[9px] font-mono uppercase tracking-widest mb-1">Год</p>
+                <p className="text-sm font-bold text-zinc-900 font-mono">{project.year}</p>
               </div>
-              <div className="col-span-2">
-                <p className="text-zinc-400 text-[9px] sm:text-[10px] font-mono uppercase tracking-widest mb-1">Категория</p>
+              <div className="col-span-2 lg:col-span-1">
+                <p className="text-zinc-400 text-[9px] font-mono uppercase tracking-widest mb-1">Категория</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {(Array.isArray(project.category) ? project.category : [project.category]).map((cat, i) => (
-                    <span key={i} className="text-[10px] sm:text-xs bg-zinc-200 px-3 py-1 rounded-full font-medium text-zinc-600">
+                    <span key={i} className="text-[10px] bg-zinc-200 px-3 py-1 rounded-full font-medium text-zinc-600">
                       {cat}
                     </span>
                   ))}
@@ -141,57 +149,56 @@ export const ProjectPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 mt-6">
-               <Link 
-                to="/contacts"
-                className="flex items-center justify-center gap-2 bg-zinc-900 text-white py-3 px-6 font-black text-xs uppercase tracking-widest hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-900/20 rounded-lg"
-               >
-                 <Mail size={14} />
-                 Связаться
-               </Link>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-zinc-300/50">
-              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-4">Другие проекты</p>
-              <div className="grid grid-cols-2 gap-4">
-                {PROJECTS.filter(p => p.id !== project.id).slice(0, 4).map(p => {
-                  const otherVideoSrc = getEmbedUrl(p.videoUrl || p.vkIframeSrc);
-                  return (
-                    <Link 
-                      key={p.id} 
-                      to={`/project/${p.id}`}
-                      className="group flex flex-col gap-2"
-                    >
-                      <div className="aspect-video bg-zinc-200 rounded-lg overflow-hidden relative border border-zinc-300/30 shadow-sm">
-                        {otherVideoSrc ? (
-                          <div className="w-full h-full relative pointer-events-none">
-                            <iframe 
-                              src={`${otherVideoSrc}?controls=false&muted=true&autoplay=false`} 
-                              className="absolute inset-0 w-full h-full object-cover"
-                              title={p.title}
-                              frameBorder="0"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                          </div>
-                        ) : (
-                          <img 
-                            src={p.imageUrl || `https://picsum.photos/seed/${p.id}/400/225`} 
-                            alt={p.title} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                            referrerPolicy="no-referrer"
-                          />
-                        )}
-                      </div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-tight text-zinc-900 line-clamp-1 group-hover:text-zinc-500 transition-colors">
-                        {p.title}
-                      </h4>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
+            <Link 
+              to="/contacts"
+              className="flex items-center justify-center gap-2 bg-zinc-900 text-white py-4 px-6 font-black text-xs uppercase tracking-widest hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-900/20 rounded-xl"
+            >
+              <Mail size={14} />
+              Обсудить проект
+            </Link>
           </div>
+        </div>
+      </div>
+
+      {/* "Other Projects" moved to bottom */}
+      <div className="mt-24 pt-12 border-t border-zinc-300/50">
+        <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-8">Другие проекты</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {PROJECTS.filter(p => p.id !== project.id).slice(0, 4).map(p => {
+            const otherVideoSrc = getEmbedUrl(p.videoUrl || p.vkIframeSrc);
+            return (
+              <Link 
+                key={p.id} 
+                to={`/project/${p.id}`}
+                className="group flex flex-col gap-3"
+              >
+                <div className="aspect-video bg-zinc-200 rounded-xl overflow-hidden relative border border-zinc-300/30 shadow-sm">
+                  {otherVideoSrc ? (
+                    <div className="w-full h-full relative pointer-events-none">
+                      <iframe 
+                        src={`${otherVideoSrc}?controls=false&muted=true&autoplay=false`} 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        title={p.title}
+                        frameBorder="0"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                    </div>
+                  ) : (
+                    <img 
+                      src={p.imageUrl || `https://picsum.photos/seed/${p.id}/400/225`} 
+                      alt={p.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
+                </div>
+                <h4 className="text-[10px] font-bold uppercase tracking-tight text-zinc-900 line-clamp-1 group-hover:text-zinc-500 transition-colors">
+                  {p.title}
+                </h4>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

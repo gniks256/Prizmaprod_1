@@ -94,7 +94,7 @@ export const Home: React.FC = () => {
           className="relative z-10 max-w-5xl"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.5em] text-zinc-400 mb-4 md:mb-6">PRIZMA - Video Production Studio</p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-900 mb-8 md:mb-12 break-words">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tight leading-[0.9] text-zinc-900 mb-8 md:mb-12 break-words">
             Производство <br />
             <span className="text-transparent stroke-zinc-900 stroke-1" style={{ WebkitTextStroke: '1px #18181b' }}>видео</span> <br />
             полного цикла
@@ -223,7 +223,7 @@ export const Home: React.FC = () => {
       {/* CTA Section */}
       <section className="text-center py-16 sm:py-24 md:py-32 bg-zinc-900 text-white rounded-2xl relative overflow-hidden">
         <div className="relative z-10 max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tighter mb-8 md:mb-12 break-words">Готовы создать что-то <br /> <span className="text-zinc-400">особенное?</span></h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tight leading-tight mb-8 md:mb-12 break-words">Готовы создать что-то <br /> <span className="text-zinc-400">особенное?</span></h2>
           <p className="text-zinc-400 mb-10 md:mb-14 text-base sm:text-lg md:text-xl font-light">
             Оставьте заявку, и мы свяжемся с вами для обсуждения деталей вашего будущего проекта.
           </p>
