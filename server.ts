@@ -96,6 +96,8 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: "spa",
     });
+    // Explicitly serve public directory in development
+    app.use(express.static(path.join(process.cwd(), "public")));
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
