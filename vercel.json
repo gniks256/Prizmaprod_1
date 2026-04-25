@@ -10,6 +10,10 @@
       "dest": "/sitemap.xml"
     },
     {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
       "src": "/api/send-lead",
       "dest": "/api/send-lead.ts"
     },
@@ -17,7 +21,7 @@
       "handle": "filesystem"
     },
     {
-      "src": "/((?!robots\\.txt|sitemap\\.xml|apple-touch-icon\\.png|favicon\\.ico|api/).*)",
+      "src": "/((?!robots\\.txt|sitemap\\.xml|manifest\\.json|apple-touch-icon\\.png|favicon\\.ico|api/).*)",
       "dest": "/index.html"
     }
   ]
