@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://prizmaprod.ru/sitemap.xml
+
+User-agent: Yandex
+Allow: /
+Sitemap: https://prizmaprod.ru/sitemap.xml
+Host: https://prizmaprod.ru

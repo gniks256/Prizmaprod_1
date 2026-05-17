@@ -44,6 +44,53 @@ export const ProjectPage: React.FC = () => {
         <meta name="description" content={`Видео проект ${project.title} для клиента ${project.client}. Категория: ${Array.isArray(project.category) ? project.category.join(', ') : project.category}.`} />
         <meta property="og:title" content={`${project.title} | PRIZMA Production`} />
         <meta property="og:image" content={project.imageUrl} />
+        <link rel="canonical" href={`https://prizmaprod.ru/project/${project.id}`} />
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": project.title,
+              "description": `Видео проект ${project.title} для клиента ${project.client}.`,
+              "thumbnailUrl": project.imageUrl,
+              "uploadDate": `${project.year}-01-01`,
+              "contentUrl": project.videoUrl || project.vkIframeSrc,
+              "embedUrl": getEmbedUrl(project.videoUrl || project.vkIframeSrc),
+              "publisher": {
+                "@type": "Organization",
+                "name": "PRIZMA Production",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://prizmaprod.ru/apple-touch-icon.png"
+                }
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Главная",
+                  "item": "https://prizmaprod.ru/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Портфолио",
+                  "item": "https://prizmaprod.ru/portfolio"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": project.title,
+                  "item": `https://prizmaprod.ru/project/${project.id}`
+                }
+              ]
+            }
+          ])}
+        </script>
       </Helmet>
       <button 
         onClick={() => navigate(-1)}

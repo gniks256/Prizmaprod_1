@@ -11,6 +11,11 @@ export const Journal: React.FC = () => {
       <Helmet>
         <title>Журнал | PRIZMA Video Production</title>
         <meta name="description" content="Полезные статьи о видеопроизводстве, ИИ-технологиях и маркетинге от студии PRIZMA." />
+        <meta property="og:title" content="Журнал PRIZMA Video Production" />
+        <meta property="og:description" content="Читайте наш блог о видеомаркетинге, съемках и ИИ в производстве контента." />
+        <meta property="og:url" content="https://prizmaprod.ru/journal" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/journal" />
       </Helmet>
 
       <div className="mb-12">

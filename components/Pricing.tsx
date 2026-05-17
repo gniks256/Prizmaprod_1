@@ -53,6 +53,11 @@ export const Pricing: React.FC = () => {
       <Helmet>
         <title>Цены на видеосъемку | PRIZMA Production</title>
         <meta name="description" content="Узнайте стоимость профессиональной видеосъемки в Воронеже. Прозрачные цены на интерьерную съемку, контент для соцсетей и мероприятия." />
+        <meta property="og:title" content="Прайс-лист PRIZMA Production" />
+        <meta property="og:description" content="Прозрачное ценообразование на услуги видеопроизводства. Интерьерная съемка от 8000р." />
+        <meta property="og:url" content="https://prizmaprod.ru/pricing" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/pricing" />
       </Helmet>
       <h1 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase tracking-tighter mb-10 md:mb-16 select-none leading-[0.85] break-words">
         Стоимость видеосъемки и монтажа видео

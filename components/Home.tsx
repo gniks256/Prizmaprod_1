@@ -23,6 +23,60 @@ export const Home: React.FC = () => {
       <Helmet>
         <title>PRIZMA Video Production | Главная</title>
         <meta name="description" content="PRIZMA Production — студия видеопроизводства полного цикла. Создаем видео, которое решает бизнес-задачи." />
+        <meta property="og:title" content="PRIZMA Video Production | Главная" />
+        <meta property="og:description" content="Студия видеопроизводства полного цикла. Создаем качественный визуальный контент для бизнеса." />
+        <meta property="og:url" content="https://prizmaprod.ru/" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/" />
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "PRIZMA Production",
+              "alternateName": "ПРИЗМА Видео Продакшн",
+              "url": "https://prizmaprod.ru/",
+              "logo": "https://prizmaprod.ru/apple-touch-icon.png",
+              "description": "Профессиональный видеопродакшн полного цикла. Архитектурная съемка, мероприятия, контент для соцсетей.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Voronezh",
+                "addressCountry": "RU"
+              },
+              "sameAs": [
+                "https://vk.com/prizmaprod"
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "PRIZMA Production",
+              "image": "https://prizmaprod.ru/apple-touch-icon.png",
+              "url": "https://prizmaprod.ru/",
+              "telephone": "+79102814981",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Voronezh",
+                "addressCountry": "RU"
+              },
+              "priceRange": "₽₽",
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              }
+            }
+          ])}
+        </script>
       </Helmet>
 
       {/* Hero Section */}
@@ -75,7 +129,7 @@ export const Home: React.FC = () => {
                 >
                   <img 
                     src={img} 
-                    alt="" 
+                    alt="Пример работы видеопродакшн студии PRIZMA" 
                     className="w-full h-full object-cover" 
                     referrerPolicy="no-referrer" 
                   />

@@ -85,6 +85,11 @@ export const Contacts: React.FC = () => {
             <Helmet>
                 <title>Контакты | PRIZMA Production</title>
                 <meta name="description" content="Свяжитесь с нами для обсуждения вашего видеопроекта. Телефон: 8 910 281-49-81. Работаем в Воронеже и по всей России." />
+                <meta property="og:title" content="Контакты PRIZMA Production" />
+                <meta property="og:description" content="Свяжитесь с нами любым удобным способом: TG, VK, телефон или почта." />
+                <meta property="og:url" content="https://prizmaprod.ru/contacts" />
+                <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+                <link rel="canonical" href="https://prizmaprod.ru/contacts" />
             </Helmet>
             <h1 className="text-zinc-900 text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-8 md:mb-12 select-none leading-none break-words">
                 Контакты

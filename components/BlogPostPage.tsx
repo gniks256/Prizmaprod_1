@@ -27,6 +27,58 @@ export const BlogPostPage: React.FC = () => {
       <Helmet>
         <title>{post.title} | Журнал PRIZMA</title>
         <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://prizmaprod.ru/journal/${post.slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": post.title,
+              "description": post.excerpt,
+              "datePublished": post.date,
+              "author": {
+                "@type": "Organization",
+                "name": "PRIZMA Production"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "PRIZMA Production",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://prizmaprod.ru/apple-touch-icon.png"
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://prizmaprod.ru/journal/${post.slug}`
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Главная",
+                  "item": "https://prizmaprod.ru/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Журнал",
+                  "item": "https://prizmaprod.ru/journal"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": post.title,
+                  "item": `https://prizmaprod.ru/journal/${post.slug}`
+                }
+              ]
+            }
+          ])}
+        </script>
       </Helmet>
 
       <Link 

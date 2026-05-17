@@ -47,6 +47,11 @@ const Portfolio: React.FC<{
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={`Посмотрите наши работы в категории ${activeCategory}. Профессиональный видеопродакшн PRIZMA.`} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={`Портфолио проектов PRIZMA по категории ${activeCategory}. Примеры архитектурной съемки, рекламы и мероприятий.`} />
+        <meta property="og:url" content="https://prizmaprod.ru/portfolio" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/portfolio" />
       </Helmet>
       <div className="md:hidden mb-6">
         <h1 className="text-2xl font-black text-zinc-900 mb-0.5 uppercase tracking-tight leading-tight">{activeCategory}</h1>

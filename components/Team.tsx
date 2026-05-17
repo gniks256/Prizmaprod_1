@@ -8,6 +8,11 @@ export const Team: React.FC = () => {
       <Helmet>
         <title>Наша команда | PRIZMA Production</title>
         <meta name="description" content="Познакомьтесь с командой PRIZMA Production. Никита и Игорь — сооснователи и ведущие специалисты студии видеопроизводства." />
+        <meta property="og:title" content="Команда PRIZMA Production" />
+        <meta property="og:description" content="Познакомьтесь с основателями студии Никитой и Игорем — экспертами в области видеопроизводства." />
+        <meta property="og:url" content="https://prizmaprod.ru/team" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/team" />
       </Helmet>
       <h1 className="text-zinc-900 text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-8 md:mb-12 select-none leading-none break-words">
         Наша Команда

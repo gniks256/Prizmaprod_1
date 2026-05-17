@@ -31,6 +31,11 @@ export const WhyUs: React.FC = () => {
       <Helmet>
         <title>Почему выбирают нас | PRIZMA Production</title>
         <meta name="description" content="Преимущества работы с PRIZMA Production: полный цикл производства, решение бизнес-задач, гибкие условия и глубокое погружение в продукт." />
+        <meta property="og:title" content="Почему выбирают PRIZMA Production" />
+        <meta property="og:description" content="Узнайте о наших преимуществах: от ИИ-технологий до официального договора и глубокого погружения в бизнес клиента." />
+        <meta property="og:url" content="https://prizmaprod.ru/why-us" />
+        <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
+        <link rel="canonical" href="https://prizmaprod.ru/why-us" />
       </Helmet>
       <h1 className="text-zinc-900 text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-10 md:mb-12 select-none leading-none break-words">
         Почему выбирают PRIZMA Production
