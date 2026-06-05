@@ -100,10 +100,10 @@ export const ProjectPage: React.FC = () => {
         <span className="text-xs font-mono uppercase tracking-widest">Назад</span>
       </button>
 
-      {/* Title for Mobile */}
-      <div className="lg:hidden mb-10">
+      {/* Title Section (Single H1 for SEO) */}
+      <div className="mb-10 lg:mb-16">
         <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
-        <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight leading-tight text-zinc-900 break-words">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-6xl font-black uppercase tracking-tight leading-tight text-zinc-900 break-words">
           {project.title}
         </h1>
       </div>
@@ -117,9 +117,9 @@ export const ProjectPage: React.FC = () => {
                 return (
                   <div key={idx} className="flex flex-col gap-4">
                     {vid.title && (
-                      <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-400">
+                      <h2 className="text-xs font-mono uppercase tracking-widest text-zinc-400">
                         {vid.title}
-                      </h3>
+                      </h2>
                     )}
                     <div className={`relative overflow-hidden bg-zinc-900 rounded-xl shadow-2xl border border-zinc-800 mx-auto w-full ${vid.isVertical ? 'aspect-[9/16] max-w-[320px]' : 'aspect-video'}`}>
                       <iframe 
@@ -129,6 +129,7 @@ export const ProjectPage: React.FC = () => {
                         frameBorder="0"
                         allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                         allowFullScreen
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -141,16 +142,18 @@ export const ProjectPage: React.FC = () => {
                 <iframe 
                   src={`${videoSrc}?autoplay=false&dnt=true`} 
                   className="absolute inset-0 w-full h-full"
-                  title={project.title}
+                  title={`Видео: ${project.title}`}
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                   allowFullScreen
+                  loading="lazy"
                 />
               ) : (
                 <img 
                   src={project.imageUrl || 'https://via.placeholder.com/1920x1080?text=PRIZMA'} 
-                  alt={project.title}
+                  alt={`Кадр из видео ${project.title}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               )}
             </div>
@@ -168,11 +171,8 @@ export const ProjectPage: React.FC = () => {
 
         <div className="lg:col-span-4">
           <div className="flex flex-col gap-8 md:gap-10 sticky top-32">
-            <div className="hidden lg:block">
-              <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-[0.3em] mb-2">Проект</p>
-              <h1 className="text-4xl xl:text-6xl font-black uppercase tracking-tight leading-tight text-zinc-900 break-words">
-                {project.title}
-              </h1>
+            <div className="hidden lg:block h-0 opacity-0 overflow-hidden">
+               {/* Hidden but kept for semantic structure if needed, but H1 is now shared at the top */}
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-8 py-8 md:py-10 border-y border-zinc-300/50">
@@ -234,9 +234,10 @@ export const ProjectPage: React.FC = () => {
                   ) : (
                     <img 
                       src={p.imageUrl || `https://picsum.photos/seed/${p.id}/400/225`} 
-                      alt={p.title} 
+                      alt={`Проект: ${p.title} (${p.client})`} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                   )}
                 </div>

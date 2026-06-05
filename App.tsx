@@ -53,14 +53,19 @@ const Portfolio: React.FC<{
         <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
         <link rel="canonical" href="https://prizmaprod.ru/portfolio" />
       </Helmet>
-      <div className="md:hidden mb-6">
-        <h1 className="text-2xl font-black text-zinc-900 mb-0.5 uppercase tracking-tight leading-tight">{activeCategory}</h1>
-        <p className="text-zinc-500 text-[10px] font-mono uppercase tracking-widest">{filteredProjects.length} Проектов</p>
-      </div>
-      <div className="hidden md:block mb-8 md:mb-12">
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight">
+      <div className="mb-8 md:mb-16 lg:mb-20">
+        <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-zinc-900 mb-1 lg:mb-2 uppercase tracking-tighter leading-tight lg:leading-[0.85] select-none">
           {activeCategory === Category.ALL ? 'Портфолио' : activeCategory}
         </h1>
+        <div className="flex items-center gap-3">
+          <p className="text-zinc-500 text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] font-medium grow md:grow-0">
+            {activeCategory === Category.ALL ? 'Video Production Portfolio' : 'Project Category'}
+          </p>
+          <div className="h-px bg-zinc-300 grow hidden md:block opacity-50"></div>
+          <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-widest hidden sm:block">
+            {filteredProjects.length} Проектов
+          </p>
+        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 lg:gap-x-10">
         {filteredProjects.map((project) => (
