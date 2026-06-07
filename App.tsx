@@ -53,21 +53,27 @@ const Portfolio: React.FC<{
         <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
         <link rel="canonical" href="https://prizmaprod.ru/portfolio" />
       </Helmet>
-      <div className="mb-8 md:mb-16 lg:mb-20">
-        <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-zinc-900 mb-1 lg:mb-2 uppercase tracking-tighter leading-tight lg:leading-[0.85] select-none">
-          {activeCategory === Category.ALL ? 'Портфолио' : activeCategory}
+      <div className="mb-12 md:mb-16 lg:mb-20 w-full text-left">
+        <h1 className="text-[1.8rem] min-[360px]:text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-[4rem] md:text-[6rem] lg:text-[7.5rem] xl:text-[9rem] font-sans font-black text-zinc-950 uppercase tracking-tighter leading-none select-none break-words">
+          {activeCategory === Category.ALL ? (
+            <>
+              Наши <span className="font-serif italic text-brandOrange font-normal lowercase tracking-normal">работы</span>
+            </>
+          ) : (
+            activeCategory
+          )}
         </h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mt-4">
           <p className="text-zinc-500 text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] font-medium grow md:grow-0">
             {activeCategory === Category.ALL ? 'Video Production Portfolio' : 'Project Category'}
           </p>
-          <div className="h-px bg-zinc-300 grow hidden md:block opacity-50"></div>
+          <div className="h-px bg-zinc-200 grow hidden md:block"></div>
           <p className="text-zinc-400 text-[10px] font-mono uppercase tracking-widest hidden sm:block">
             {filteredProjects.length} Проектов
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 lg:gap-x-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 lg:gap-x-10 w-full">
         {filteredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
@@ -120,7 +126,7 @@ const AppContent: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-[#F0EEE9] text-zinc-900 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-white text-zinc-950 flex flex-col font-sans">
       <Helmet>
         <title>PRIZMA Video Production | Видеопроизводство полного цикла</title>
         <meta name="description" content="Профессиональный видеопродакшн PRIZMA в Воронеже. Архитектурная съемка, контент для соцсетей, ИИ-генерация и освещение мероприятий." />
@@ -135,12 +141,15 @@ const AppContent: React.FC = () => {
         toggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
       />
 
-      <main className="flex-1 w-full min-h-screen p-5 sm:p-8 md:p-10 lg:p-16 xl:p-20 mt-16 md:mt-0 max-w-[1600px] mx-auto">
-        <AppRoutes activeCategory={activeCategory} />
-
-        <div className="mt-16 pt-8 border-t border-zinc-300 md:hidden">
-          <p className="text-center text-zinc-500 text-[9px] font-mono uppercase tracking-widest font-bold">PRIZMA Video Production</p>
+      <main className="flex-1 w-full flex flex-col px-4 sm:px-6 lg:px-8 py-10 md:py-16 max-w-7xl mx-auto overflow-hidden">
+        <div className="w-full flex-1 flex flex-col items-center">
+          <AppRoutes activeCategory={activeCategory} />
         </div>
+
+        <footer className="w-full mt-24 pt-10 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-400 text-[10px] font-mono uppercase tracking-[0.2em]">
+          <p className="text-center sm:text-left">&copy; 2026 PRIZMA Video Production. Все права защищены.</p>
+          <p className="font-extrabold text-zinc-600">Воронеж &bull; По всей России</p>
+        </footer>
       </main>
     </div>
   );

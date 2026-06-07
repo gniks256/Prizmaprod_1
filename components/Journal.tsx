@@ -18,11 +18,11 @@ export const Journal: React.FC = () => {
         <link rel="canonical" href="https://prizmaprod.ru/journal" />
       </Helmet>
 
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-4">
-          Журнал
+      <div className="mb-12 md:mb-16 lg:mb-20 w-full text-left">
+        <h1 className="text-zinc-950 text-[1.8rem] min-[360px]:text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-6xl xl:text-7xl font-sans font-black uppercase tracking-tighter select-none leading-[0.85] break-words mb-4">
+          Наш <span className="font-serif italic text-brandOrange font-normal lowercase tracking-normal">журнал</span>
         </h1>
-        <p className="text-zinc-500 font-medium max-w-xl">
+        <p className="text-zinc-500 text-sm font-medium max-w-xl leading-relaxed">
           Делимся опытом, рассказываем о технологиях и помогаем бизнесу эффективно использовать видеоконтент.
         </p>
       </div>

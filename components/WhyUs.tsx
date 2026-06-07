@@ -37,7 +37,7 @@ export const WhyUs: React.FC = () => {
         <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
         <link rel="canonical" href="https://prizmaprod.ru/why-us" />
       </Helmet>
-      <h1 className="text-zinc-900 text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-10 md:mb-12 select-none leading-none break-words">
+      <h1 className="text-zinc-900 text-[1.8rem] min-[360px]:text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-6xl xl:text-7xl font-sans font-black uppercase tracking-tighter mb-10 md:mb-12 select-none leading-[0.85] break-words">
         Почему выбирают PRIZMA Production
       </h1>
 

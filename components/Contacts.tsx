@@ -91,15 +91,15 @@ export const Contacts: React.FC = () => {
                 <meta property="og:image" content="https://prizmaprod.ru/apple-touch-icon.png" />
                 <link rel="canonical" href="https://prizmaprod.ru/contacts" />
             </Helmet>
-            <h1 className="text-zinc-900 text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-8 md:mb-12 select-none leading-none break-words">
+            <h1 className="text-zinc-900 text-[1.8rem] min-[360px]:text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-6xl xl:text-7xl font-sans font-black uppercase tracking-tighter mb-8 md:mb-12 select-none leading-[0.85] break-words">
                 Контакты
             </h1>
 
             <div className="flex flex-col lg:flex-row gap-12 md:gap-16 lg:gap-24">
-                <div className="flex-1 flex flex-col gap-10 md:gap-12">
+                <div className="flex-1 flex flex-col gap-10 md:gap-12 w-full">
                     <div className="flex flex-col gap-2">
                         <span className="text-[10px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest font-bold">Телефон</span>
-                        <a href="tel:89102814981" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black hover:text-zinc-600 transition-colors tracking-tighter leading-[0.85]">
+                        <a href="tel:89102814981" className="text-xl min-[350px]:text-2xl min-[400px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black hover:text-brandOrange transition-colors tracking-tighter leading-[0.85] break-words">
                             8 910 281-49-81
                         </a>
                     </div>
@@ -135,7 +135,7 @@ export const Contacts: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex-1 bg-white p-6 md:p-8 border-2 border-zinc-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.05)] rounded-2xl">
+                <div className="flex-1 bg-white p-6 md:p-8 border border-zinc-100 shadow-xl shadow-zinc-100/50 rounded-2xl">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         {/* Honeypot field */}
                         <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
@@ -161,7 +161,7 @@ export const Contacts: React.FC = () => {
                             <label className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">Ваш вопрос</label>
                             <textarea name="message" rows={2} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Опишите задачу..." className="w-full border-b border-zinc-200 py-1 text-sm focus:outline-none focus:border-zinc-900 transition-colors bg-transparent resize-none font-medium" disabled={status === 'loading' || status === 'success'} />
                         </div>
-                        <button type="submit" disabled={status === 'loading' || status === 'success'} className={`mt-2 py-3 px-6 font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-zinc-900 rounded-lg ${status === 'success' ? 'bg-green-600 text-white border-green-600' : status === 'error' ? 'bg-red-600 text-white border-red-600' : 'bg-zinc-900 text-white hover:bg-transparent hover:text-zinc-900'}`}>
+                        <button type="submit" disabled={status === 'loading' || status === 'success'} className={`mt-2 py-3.5 px-6 font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-zinc-950 rounded-lg ${status === 'success' ? 'bg-green-600 text-white border-green-600' : status === 'error' ? 'bg-red-600 text-white border-red-600' : 'bg-zinc-950 text-white hover:bg-brandOrange hover:border-brandOrange'}`}>
                             {status === 'loading' ? <Loader2 className="animate-spin" size={16} /> : status === 'success' ? <Check size={16} /> : status === 'error' ? 'Ошибка' : 'Отправить заявку'}
                         </button>
                         {status === 'error' && (

@@ -93,10 +93,10 @@ export const BlogPostPage: React.FC = () => {
           <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-4">
             {post.date}
           </div>
-          <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-8">
+          <h1 className="text-zinc-950 text-[1.8rem] min-[360px]:text-[2rem] sm:text-[2.5rem] md:text-4xl lg:text-5xl font-sans font-black uppercase tracking-tighter leading-tight mb-8 select-none break-words">
             {post.title}
           </h1>
-          <p className="text-xl text-zinc-500 font-medium leading-relaxed italic border-l-4 border-zinc-900 pl-6">
+          <p className="text-lg md:text-xl text-zinc-500 font-medium leading-relaxed italic border-l-2 border-brandOrange pl-6">
             {post.excerpt}
           </p>
         </header>

@@ -75,14 +75,30 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Inter Tight"', 'Inter', 'sans-serif'],
+              serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              brandOrange: '#FF5722',
+            }
+          }
+        }
+      }
+    </script>
     <script src="https://vk.com/js/api/openapi.js?173"></script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;900&display=swap');
       
       body {
-        background-color: #F0EEE9;
+        background-color: #ffffff;
         color: #18181b;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter Tight', 'Inter', sans-serif;
       }
       
       .no-scrollbar::-webkit-scrollbar {
