@@ -62,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </NavLink>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-sans font-extrabold text-[11px] uppercase tracking-wider">
+        <nav className="hidden md:flex items-center gap-3 lg:gap-4 xl:gap-7 font-sans font-bold text-[10px] lg:text-[11px] uppercase tracking-wider">
           {menuItems.map((item) => {
             const isPortfolioLink = item.path === '/portfolio';
             const isPathActive = location.pathname === item.path || (isPortfolioLink && location.pathname.startsWith('/project'));
@@ -72,8 +72,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={item.path}
                 to={item.path}
                 onClick={item.onClick}
-                className={`transition-all duration-200 hover:text-brandOrange py-2 relative ${
-                  isPathActive ? 'text-zinc-950 scale-105' : 'text-zinc-500'
+                className={`transition-all duration-200 hover:text-brandOrange py-2 relative whitespace-nowrap ${
+                  isPathActive ? 'text-zinc-950' : 'text-zinc-500'
                 }`}
               >
                 {item.label}
@@ -87,18 +87,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Right Actions & Social Links */}
         <div className="hidden md:flex items-center gap-4 text-zinc-400">
-          <a href="https://t.me/gnikw" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
-            <Send size={16} />
-          </a>
-          <a href="https://vk.com/prizmastudia" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
-            <VkIcon size={16} />
-          </a>
-          <a href="mailto:gniks1@yandex.ru" className="hover:text-brandOrange transition-colors">
-            <Mail size={16} />
-          </a>
+          <div className="hidden lg:flex items-center gap-3">
+            <a href="https://t.me/gnikw" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
+              <Send size={16} />
+            </a>
+            <a href="https://vk.com/prizmastudia" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
+              <VkIcon size={16} />
+            </a>
+            <a href="mailto:gniks1@yandex.ru" className="hover:text-brandOrange transition-colors">
+              <Mail size={16} />
+            </a>
+          </div>
           <NavLink 
             to="/contacts"
-            className="ml-2 bg-zinc-950 text-white font-black text-[10px] uppercase tracking-[0.2em] px-4 py-2.5 hover:bg-brandOrange hover:text-white transition-all rounded duration-300"
+            className="ml-2 bg-zinc-950 text-white font-black text-[10px] uppercase tracking-[0.2em] px-4 py-2.5 hover:bg-brandOrange hover:text-white transition-all rounded-lg duration-300 whitespace-nowrap"
           >
             Связаться
           </NavLink>
@@ -143,7 +145,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-20 bg-white border-b border-zinc-200 shadow-2xl z-40 max-h-[calc(100vh-5rem)] overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200">
-          <div className="px-5 pt-3 pb-8 flex flex-col gap-4 font-sans font-extrabold text-xs uppercase tracking-wider">
+          <div className="px-6 py-4 flex flex-col font-sans font-bold text-xs uppercase tracking-wider divide-y divide-zinc-100">
             {menuItems.map((item) => (
               <NavLink 
                 key={item.path}
@@ -152,8 +154,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   if (item.onClick) item.onClick();
                   toggleMobileMenu();
                 }}
-                className={({ isActive }) => `py-3 border-b border-zinc-100 flex items-center justify-between ${
-                  isActive ? 'text-brandOrange font-bold' : 'text-zinc-600'
+                className={({ isActive }) => `py-3.5 flex items-center justify-between transition-colors ${
+                  isActive ? 'text-brandOrange' : 'text-zinc-600 hover:text-brandOrange'
                 }`}
               >
                 <span>{item.label}</span>
@@ -162,22 +164,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
             ))}
 
             {/* Mobile Social & Contact */}
-            <div className="mt-4 flex flex-col gap-4">
-              <div className="flex gap-6 text-zinc-600 justify-center py-2">
+            <div className="pt-6 mt-2 flex flex-col gap-4">
+              <div className="flex gap-8 text-zinc-500 justify-center py-2">
                 <a href="https://t.me/gnikw" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
-                  <Send size={20} />
+                  <Send size={18} />
                 </a>
                 <a href="https://vk.com/prizmastudia" target="_blank" rel="noopener noreferrer" className="hover:text-brandOrange transition-colors">
-                  <VkIcon size={20} />
+                  <VkIcon size={18} />
                 </a>
                 <a href="mailto:gniks1@yandex.ru" className="hover:text-brandOrange transition-colors">
-                  <Mail size={20} />
+                  <Mail size={18} />
                 </a>
               </div>
               <NavLink 
                 to="/contacts"
                 onClick={toggleMobileMenu}
-                className="w-full text-center bg-brandOrange text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-lg shadow-md"
+                className="w-full text-center bg-zinc-950 hover:bg-brandOrange text-white font-bold text-xs uppercase tracking-widest py-3 rounded-lg shadow-sm transition-colors"
               >
                 Связаться
               </NavLink>

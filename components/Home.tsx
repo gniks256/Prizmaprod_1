@@ -148,8 +148,8 @@ export const Home: React.FC = () => {
           className="relative z-10 max-w-5xl w-full"
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.5em] text-zinc-400 mb-3 md:mb-6">PRIZMA - Video Production Studio</p>
-          <h1 className="text-[1.8rem] min-[360px]:text-[2.2rem] min-[400px]:text-[2.5rem] min-[440px]:text-[3rem] min-[480px]:text-[3.5rem] sm:text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[9.5rem] font-sans font-black uppercase tracking-tighter leading-[0.85] text-zinc-950 mb-6 md:mb-12 select-none w-full break-words">
-            Производство <br />
+          <h1 className="text-[1.8rem] min-[320px]:text-[2rem] min-[360px]:text-[2.2rem] min-[400px]:text-[2.5rem] min-[440px]:text-[3rem] min-[480px]:text-[3.5rem] sm:text-7xl md:text-[6rem] lg:text-[7.5rem] xl:text-[9.5rem] font-sans font-black uppercase tracking-tighter leading-[0.85] text-zinc-950 mb-6 md:mb-12 select-none w-full">
+            <span className="whitespace-nowrap inline-block">Производство</span> <br />
             <span className="font-serif italic text-brandOrange font-normal lowercase tracking-normal">видео</span> <br />
             полного цикла
           </h1>
