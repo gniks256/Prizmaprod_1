@@ -88,6 +88,62 @@ function main() {
     writePage(`journal/${post.slug}/index.html`, pageHtml);
   });
 
+  // 6. Generate dynamic sitemap.xml
+  console.log('Generating dynamic sitemap.xml...');
+  const currentDate = new Date().toISOString().split('T')[0];
+  const baseUrl = 'https://prizmaprod.ru';
+
+  const staticUrls = [
+    { loc: '', priority: '1.0', changefreq: 'monthly' },
+    { loc: '/portfolio', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/pricing', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/why-us', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/team', priority: '0.6', changefreq: 'monthly' },
+    { loc: '/contacts', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/journal', priority: '0.8', changefreq: 'weekly' },
+    { loc: '/privacy', priority: '0.5', changefreq: 'monthly' },
+  ];
+
+  let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  sitemapXml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  // Add static URLs
+  staticUrls.forEach(url => {
+    sitemapXml += `  <url>\n`;
+    sitemapXml += `    <loc>${baseUrl}${url.loc}</loc>\n`;
+    sitemapXml += `    <lastmod>${currentDate}</lastmod>\n`;
+    sitemapXml += `    <changefreq>${url.changefreq}</changefreq>\n`;
+    sitemapXml += `    <priority>${url.priority}</priority>\n`;
+    sitemapXml += `  </url>\n`;
+  });
+
+  // Add Project URLs
+  PROJECTS.forEach(project => {
+    sitemapXml += `  <url>\n`;
+    sitemapXml += `    <loc>${baseUrl}/project/${project.id}</loc>\n`;
+    sitemapXml += `    <lastmod>${currentDate}</lastmod>\n`;
+    sitemapXml += `    <changefreq>monthly</changefreq>\n`;
+    sitemapXml += `    <priority>0.7</priority>\n`;
+    sitemapXml += `  </url>\n`;
+  });
+
+  // Add Blog Post URLs
+  BLOG_POSTS.forEach(post => {
+    sitemapXml += `  <url>\n`;
+    sitemapXml += `    <loc>${baseUrl}/journal/${post.slug}</loc>\n`;
+    sitemapXml += `    <lastmod>${currentDate}</lastmod>\n`;
+    sitemapXml += `    <changefreq>monthly</changefreq>\n`;
+    sitemapXml += `    <priority>0.7</priority>\n`;
+    sitemapXml += `  </url>\n`;
+  });
+
+  sitemapXml += `</urlset>\n`;
+
+  // Write to both public and dist directories
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXml, 'utf-8');
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf-8');
+  console.log('Sitemap.xml updated in public/ and dist/');
+
   console.log('Static site compilation completed successfully!');
 }
 

@@ -1,62 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://prizmaprod.ru/</loc>
-    <lastmod>2026-04-25</lastmod>
+    <loc>https://prizmaprod.ru</loc>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/portfolio</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/pricing</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/why-us</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/team</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/contacts</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/journal</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://prizmaprod.ru/privacy</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/arch-new-1</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/arch-1</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/arch-2</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/basketball-vbl</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/scentmart-social</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/kristall-social</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/event-1</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/event-2</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/event-3</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/arch-3</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/event-4</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/project/aroma-visualization-ai</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://prizmaprod.ru/journal/real-estate-video-marketing</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/journal/petrovskie-ozera-case</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://prizmaprod.ru/journal/photo-vs-video-real-estate</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://prizmaprod.ru/journal/event-videography-guide</loc>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
