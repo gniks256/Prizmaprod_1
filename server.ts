@@ -14,7 +14,9 @@ import {
   generateContacts,
   generateJournal,
   generateProject,
-  generateBlogPost
+  generateBlogPost,
+  generatePrivacy,
+  generateNotFound
 } from "./templates";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -136,6 +138,10 @@ async function startServer() {
     app.get("/journal", (req, res) => {
       res.send(generateJournal());
     });
+
+    app.get("/privacy", (req, res) => {
+      res.send(generatePrivacy());
+    });
     
     app.get("/project/:id", (req, res) => {
       const { id } = req.params;
@@ -155,12 +161,17 @@ async function startServer() {
       res.send(generateBlogPost(post));
     });
 
+    // Fallback 404 handler for development
+    app.get("*", (req, res) => {
+      res.status(404).send(generateNotFound());
+    });
+
   } else {
     // In Production (or offline builds), serve the compiled static output from the 'dist' directory
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.status(404).sendFile(path.join(distPath, "404.html"));
     });
   }
 

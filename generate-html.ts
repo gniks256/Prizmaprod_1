@@ -10,7 +10,9 @@ import {
   generateContacts,
   generateJournal,
   generateProject,
-  generateBlogPost
+  generateBlogPost,
+  generatePrivacy,
+  generateNotFound
 } from './templates';
 
 const DIST_DIR = path.join(process.cwd(), 'dist');
@@ -71,6 +73,8 @@ function main() {
   writePage('team/index.html', generateTeam());
   writePage('contacts/index.html', generateContacts());
   writePage('journal/index.html', generateJournal());
+  writePage('privacy/index.html', generatePrivacy());
+  writePage('404.html', generateNotFound());
 
   // 4. Compile dynamic Project detail pages
   PROJECTS.forEach(project => {

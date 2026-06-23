@@ -79,6 +79,16 @@ const SVGS = {
   X: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <line x1="18" y1="6" x2="6" y2="18"></line>
     <line x1="6" y1="6" x2="18" y2="18"></line>
+  </svg>`,
+  Zap: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+  </svg>`,
+  Shield: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+  </svg>`,
+  Clock: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="12 6 12 12 16 14"></polyline>
   </svg>`
 };
 
@@ -137,6 +147,25 @@ export function wrapLayout(content: string, activePath: string, meta: PageMeta):
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="yandex-verification" content="45084375cee74b1d" />
     <meta name="google-site-verification" content="OWYnr58zL6lKuOQjR0utDAYN_5aAtmhMwHgpHI0LNGU" />
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(109271512, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/109271512" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <title>${meta.title}</title>
     <meta name="description" content="${meta.description.replace(/"/g, '&quot;')}" />
     <meta name="keywords" content="видеопродакшн, видеосъемка воронеж, архитектурная съемка, производство видео, рекламные ролики, контент для соцсетей, ИИ видео, PRIZMA" />
@@ -276,10 +305,36 @@ export function wrapLayout(content: string, activePath: string, meta: PageMeta):
 
         <!-- Footer -->
         <footer class="w-full mt-24 pt-10 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-400 text-[10px] font-mono uppercase tracking-[0.2em]">
-          <p class="text-center sm:text-left">&copy; 2026 PRIZMA Video Production. Все права защищены.</p>
+          <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
+            <p>&copy; 2026 PRIZMA Video Production. Все права защищены.</p>
+            <a href="/privacy" class="underline hover:text-brandOrange transition-colors">Политика конфиденциальности</a>
+          </div>
           <p class="font-extrabold text-zinc-600">Воронеж &bull; По всей России</p>
         </footer>
       </main>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="hidden fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-md bg-zinc-950/95 backdrop-blur-md text-white p-5 rounded-2xl shadow-2xl border border-zinc-800/80 z-[100] flex flex-col gap-4 transition-all duration-300">
+      <div class="flex flex-col gap-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-brandOrange flex items-center justify-center">
+            ${SVGS.Zap}
+          </span>
+          <span class="font-sans font-bold uppercase tracking-wider text-[11px] text-zinc-300">Файлы Cookie & Конфиденциальность</span>
+        </div>
+        <p class="text-[11px] md:text-xs text-zinc-300 leading-relaxed font-light">
+          Мы используем файлы cookie для улучшения работы сайта и сбора статистики. Продолжая использовать наш сайт, вы соглашаетесь с условиями их обработки в соответствии с нашей <a href="/privacy" class="underline text-brandOrange hover:text-white transition-all font-medium">Политикой конфиденциальности</a>.
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="cookie-accept-btn" class="flex-1 md:flex-none py-2 px-5 bg-brandOrange text-white hover:bg-white hover:text-zinc-950 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all duration-300">
+          Принять
+        </button>
+        <button id="cookie-decline-btn" class="flex-1 md:flex-none py-2 px-4 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-500 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all duration-300">
+          Отклонить
+        </button>
+      </div>
     </div>
 
     <!-- Layout & Nav Logic -->
@@ -293,6 +348,31 @@ export function wrapLayout(content: string, activePath: string, meta: PageMeta):
           mobileMenu.classList.toggle('hidden');
           const isHidden = mobileMenu.classList.contains('hidden');
           mobileMenuBtn.innerHTML = isHidden ? \`${SVGS.Menu}\` : \`${SVGS.X}\`;
+        });
+      }
+
+      // Cookie Banner Logic
+      const cookieBanner = document.getElementById('cookie-banner');
+      const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
+      const cookieDeclineBtn = document.getElementById('cookie-decline-btn');
+      
+      if (cookieBanner && cookieAcceptBtn && cookieDeclineBtn) {
+        const consent = localStorage.getItem('cookieConsent');
+        const declined = sessionStorage.getItem('cookieConsentDeclined');
+        if (!consent && !declined) {
+          setTimeout(() => {
+            cookieBanner.classList.remove('hidden');
+          }, 1500);
+        }
+        
+        cookieAcceptBtn.addEventListener('click', () => {
+          localStorage.setItem('cookieConsent', 'true');
+          cookieBanner.classList.add('hidden');
+        });
+        
+        cookieDeclineBtn.addEventListener('click', () => {
+          sessionStorage.setItem('cookieConsentDeclined', 'true');
+          cookieBanner.classList.add('hidden');
         });
       }
     </script>
@@ -976,6 +1056,14 @@ export function generateContacts(): string {
               <label class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">Ваш вопрос</label>
               <textarea id="form-message" name="message" rows="2" placeholder="Опишите задачу..." class="w-full border-b border-zinc-200 py-1 text-sm focus:outline-none focus:border-zinc-900 transition-colors bg-transparent resize-none font-medium"></textarea>
             </div>
+
+            <!-- Consent to personal data processing checkbox -->
+            <div class="flex items-start gap-2 mt-2">
+              <input type="checkbox" id="form-consent" name="consent" required checked class="mt-0.5 h-3.5 w-3.5 cursor-pointer accent-brandOrange border-zinc-300 rounded text-zinc-900 focus:ring-0" />
+              <label for="form-consent" class="text-[10px] text-zinc-500 font-medium select-none cursor-pointer leading-tight">
+                Я согласен на <a href="/privacy" class="underline hover:text-brandOrange transition-colors">обработку персональных данных</a> в соответствии с Политикой конфиденциальности.
+              </label>
+            </div>
             
             <button type="submit" id="form-submit-btn" class="mt-2 py-3.5 px-6 font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-zinc-950 text-white hover:bg-brandOrange hover:border-brandOrange border border-zinc-950 rounded-lg">
               Отправить заявку
@@ -1474,4 +1562,120 @@ export function generateBlogPost(post: BlogPost): string {
   };
 
   return wrapLayout(content, `/journal/${post.slug}`, meta);
+}
+
+// 10. Privacy Policy Page Generator
+export function generatePrivacy(): string {
+  const content = `
+    <div class="max-w-4xl w-full pb-20 prose prose-zinc prose-sm md:prose-base">
+      <div class="mb-12 md:mb-16 lg:mb-20 w-full text-left">
+        <h1 class="text-zinc-950 text-[1.8rem] min-[360px]:text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-[3.5rem] md:text-[4rem] lg:text-5xl font-sans font-black uppercase tracking-tighter select-none leading-[0.85] break-words mb-4">
+          Политика <span class="font-serif italic text-brandOrange font-normal lowercase tracking-normal">конфиденциальности</span>
+        </h1>
+        <p class="text-zinc-500 text-sm font-medium max-w-xl leading-relaxed">
+          Настоящая политика конфиденциальности регулирует сбор, обработку и хранение персональных данных пользователей сайта prizmaprod.ru.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-8 text-zinc-700 leading-relaxed font-light text-sm md:text-base">
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">1. Общие положения</h2>
+          <p>
+            Студия видеопроизводства <strong>PRIZMA Production</strong> (далее — Оператор) ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.
+          </p>
+          <p>
+            Настоящая Политика Оператора в отношении обработки персональных данных (далее — Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта <a href="https://prizmaprod.ru" class="underline hover:text-brandOrange transition-colors">prizmaprod.ru</a>.
+          </p>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">2. Какие данные мы собираем</h2>
+          <p>Оператор может обрабатывать следующие персональные данные Пользователя, которые он указывает добровольно при заполнении форм обратной связи:</p>
+          <ul class="list-disc pl-6 gap-1 flex flex-col">
+            <li>Имя;</li>
+            <li>Номер телефона / контактные данные;</li>
+            <li>Текст сообщения или вопроса (описание задачи).</li>
+          </ul>
+          <p class="mt-2">
+            Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов «cookie») с помощью внешних сервисов интернет-статистики для улучшения работы сайта.
+          </p>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">3. Цели обработки персональных данных</h2>
+          <p>Цели обработки персональных данных Пользователя:</p>
+          <ul class="list-disc pl-6 gap-1 flex flex-col">
+            <li>Информирование Пользователя посредством телефонных звонков или сообщений в мессенджерах;</li>
+            <li>Консультирование, обсуждение деталей возможного сотрудничества, расчет стоимости видеопроизводства и согласование технических заданий;</li>
+            <li>Предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте.</li>
+          </ul>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">4. Правовые основания обработки</h2>
+          <p>
+            Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.
+          </p>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">5. Порядок обработки и защиты данных</h2>
+          <p>
+            Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных (ФЗ-152 «О персональных данных»).
+          </p>
+          <ul class="list-disc pl-6 gap-1 flex flex-col">
+            <li>Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</li>
+            <li>Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</li>
+            <li>Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора <a href="mailto:gniks1@yandex.ru" class="underline hover:text-brandOrange transition-colors">gniks1@yandex.ru</a> с пометкой «Отзыв согласия на обработку персональных данных».</li>
+          </ul>
+        </section>
+
+        <section class="flex flex-col gap-2">
+          <h2 class="text-lg md:text-xl font-bold text-zinc-900 uppercase mb-1">6. Заключительные положения</h2>
+          <p>
+            Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты <a href="mailto:gniks1@yandex.ru" class="underline hover:text-brandOrange transition-colors">gniks1@yandex.ru</a>.
+          </p>
+          <p>
+            Настоящий документ будет отражать любые изменения политики обработки персональных данных Оператором. Действует бессрочно до замены ее новой версией. Актуальная версия всегда расположена в свободном доступе в сети Интернет по адресу <a href="https://prizmaprod.ru/privacy" class="underline hover:text-brandOrange transition-colors">prizmaprod.ru/privacy</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  `;
+
+  const meta: PageMeta = {
+    title: 'Политика конфиденциальности | PRIZMA Production',
+    description: 'Политика в отношении обработки персональных данных пользователей сайта prizmaprod.ru студии видеопроизводства PRIZMA Production.',
+    canonical: 'https://prizmaprod.ru/privacy'
+  };
+
+  return wrapLayout(content, '/privacy', meta);
+}
+
+// 11. 404 Not Found Page Generator
+export function generateNotFound(): string {
+  const content = `
+    <div class="max-w-xl w-full text-center py-20 flex flex-col items-center justify-center min-h-[50vh]">
+      <h1 class="text-zinc-950 text-[6rem] sm:text-[8rem] md:text-[10rem] font-sans font-black uppercase tracking-tighter leading-none select-none">
+        404
+      </h1>
+      <h2 class="font-serif italic text-brandOrange text-2xl sm:text-3xl font-normal lowercase tracking-normal -mt-4 mb-6">
+        страница не найдена
+      </h2>
+      <p class="text-zinc-500 text-sm md:text-base font-medium leading-relaxed mb-8 max-w-md">
+        Похоже, эта страница была перемещена, удалена или никогда не существовала. Давайте вернемся назад к нашему творчеству.
+      </p>
+      <a href="/" class="py-3.5 px-6 font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-zinc-950 text-white hover:bg-brandOrange hover:border-brandOrange border border-zinc-950 rounded-lg">
+        Вернуться на главную
+      </a>
+    </div>
+  `;
+
+  const meta: PageMeta = {
+    title: 'Страница не найдена | PRIZMA Production',
+    description: 'Запрашиваемая страница не найдена на сайте студии видеопроизводства PRIZMA Production.',
+    canonical: 'https://prizmaprod.ru/404'
+  };
+
+  return wrapLayout(content, '/404', meta);
 }
