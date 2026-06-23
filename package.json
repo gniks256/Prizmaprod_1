@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "tsx server.ts",
     "start": "node server.ts",
-    "build": "vite build && node generate-html.mjs",
-    "preview": "vite preview",
+    "build": "tsx generate-html.ts",
+    "preview": "node server.ts",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

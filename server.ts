@@ -4,6 +4,19 @@ import path from "path";
 import { fileURLToPath } from "url";
 import https from "https";
 
+import { PROJECTS, BLOG_POSTS } from "./constants";
+import {
+  generateHome,
+  generatePortfolio,
+  generatePricing,
+  generateWhyUs,
+  generateTeam,
+  generateContacts,
+  generateJournal,
+  generateProject,
+  generateBlogPost
+} from "./templates";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -89,17 +102,61 @@ ${text || 'Новые данные на сайте'}
 async function startServer() {
   const PORT = 3000;
 
-  // Vite middleware for development
+  // Serve static public folder assets first
+  app.use(express.static(path.join(process.cwd(), "public")));
+
   if (process.env.NODE_ENV !== "production") {
-    const { createServer: createViteServer } = await import("vite");
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
+    console.log("Starting Express Development Server with Pure HTML Templates");
+    
+    // Core routes matching template generators
+    app.get("/", (req, res) => {
+      res.send(generateHome());
     });
-    // Explicitly serve public directory in development
-    app.use(express.static(path.join(process.cwd(), "public")));
-    app.use(vite.middlewares);
+    
+    app.get("/portfolio", (req, res) => {
+      res.send(generatePortfolio());
+    });
+    
+    app.get("/pricing", (req, res) => {
+      res.send(generatePricing());
+    });
+    
+    app.get("/why-us", (req, res) => {
+      res.send(generateWhyUs());
+    });
+    
+    app.get("/team", (req, res) => {
+      res.send(generateTeam());
+    });
+    
+    app.get("/contacts", (req, res) => {
+      res.send(generateContacts());
+    });
+    
+    app.get("/journal", (req, res) => {
+      res.send(generateJournal());
+    });
+    
+    app.get("/project/:id", (req, res) => {
+      const { id } = req.params;
+      const project = PROJECTS.find(p => p.id === id);
+      if (!project) {
+        return res.status(404).send("Проект не найден");
+      }
+      res.send(generateProject(project));
+    });
+    
+    app.get("/journal/:slug", (req, res) => {
+      const { slug } = req.params;
+      const post = BLOG_POSTS.find(p => p.slug === slug);
+      if (!post) {
+        return res.redirect("/journal");
+      }
+      res.send(generateBlogPost(post));
+    });
+
   } else {
+    // In Production (or offline builds), serve the compiled static output from the 'dist' directory
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {

@@ -1,28 +1,14 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "routes": [
-    {
-      "src": "/robots.txt",
-      "dest": "/robots.txt"
-    },
-    {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json"
-    },
     {
       "src": "/api/send-lead",
       "dest": "/api/send-lead.ts"
     },
     {
       "handle": "filesystem"
-    },
-    {
-      "src": "/((?!robots\\.txt|sitemap\\.xml|manifest\\.json|apple-touch-icon\\.png|favicon\\.ico|api/).*)",
-      "dest": "/index.html"
     }
   ]
 }
